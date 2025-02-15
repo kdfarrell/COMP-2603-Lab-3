@@ -1,17 +1,50 @@
 import java.util.Random;
+import java.util.ArrayList;
 public class StationSimulation {
-    public static void main (String[] args) {
-        int min = 1;
-        int max = 15;
-        
-        Vehicle[] v = new Vehicle[10];        
+    public static void main (String[] args) {     
         for (int i = 0; i < 10; i++) {
-            int l = (int) (Math.random() * (max - min + 1)) + min;
-            int b = (int) (Math.random() * (max - min + 1)) + min;
-            int w = (int) (Math.random() * (max - min + 1)) + min;
-            
-            v[i] = new Vehicle(l,b,w);
-            System.out.println(v[i]);
+            Vehicle v = new Vehicle(
+                                    getRandomNumber(1,20),
+                                    getRandomNumber(1,5),
+                                    getRandomNumber(1,5),
+                                    getRandomNumber(1,5));
+            System.out.println(v);
         }
+        
+        //Array List
+        ArrayList<Vehicle> vehicles = new ArrayList<Vehicle>();
+        for (int i = 0; i < 10; i++) {
+            Vehicle v = new Vehicle(
+                                    getRandomNumber(1,20),
+                                    getRandomNumber(1,5),
+                                    getRandomNumber(1,5),
+                                    getRandomNumber(1,5));
+            vehicles.add(v);
+        }
+        
+        ArrayList<VehicleDriver> drivers = new ArrayList<VehicleDriver>();
+        String[] names = {"Lou", "Sue", "Drew", "Koo", "Murphy"};
+        
+        for (int i = 0; i < 5; i++) {
+            drivers.add( new VehicleDriver(names[i]));
+        }
+        
+        for (VehicleDriver driver : drivers) {
+            int index = getRandomNumber(0, 9);
+            Vehicle v = vehicles.get(index);
+            driver.addVehicle(v);
+            do {
+                index = getRandomNumber(0,10);
+                v = vehicles.get(index);
+            }
+            while (driver.addVehicle(v));
+            
+            System.out.println(driver);
+        }
+        
+    }
+    
+    public static int getRandomNumber(int min, int max) {
+        return (int) ((Math.random() * (max - min)) + min);
     }
 }
