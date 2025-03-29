@@ -10,10 +10,12 @@ public class Vehicle{
     // Constructor
     public Vehicle(int length, int breadth, int width){
         tankCapacity = length * breadth * width;
-        if(tankCapacity%2 == 0)
+        if(tankCapacity%2 == 0) {
             fuelType = "gasoline";
-        else
+        }
+        else {
             fuelType = "diesel";
+        }
         setPlateID();
         setVehicleClassification(3);
     }
@@ -41,16 +43,18 @@ public class Vehicle{
         return vehicleClassification;
     }
     
-    public String getVehicleClassification(int vehicleClassification) {
-        switch (vehicleClassification) {
-            case 1 : return "Motorcycle";
-            case 3 : return "Light Motor Vehicle";
-            case 4 : return "Heavy Motor Vehicle";
+    private void setVehicleClassification(int value) {
+        if (value == 1) {
+            this.vehicleClassification = 1;  // Motorcycle
+        } 
+        else if (value == 4) {
+            this.vehicleClassification = 4;  // Heavy Motor Vehicle
+        } 
+        else {
+            this.vehicleClassification = 3;  // Light Motor Vehicle (Default)
         }
-        return null;
     }
 
-    
     // Mutator
     private void setPlateID() {
         if (plateNumberCounter < 10) {
@@ -60,15 +64,6 @@ public class Vehicle{
             this.plateID = "TAB" + plateNumberCounter;
         }
         plateNumberCounter++;
-    }
-    
-    private void setVehicleClassification(int value) {
-        if (value == 1 || value == 4) {
-            this.vehicleClassification = value;
-        }
-        else {
-            this.vehicleClassification = 3;
-        }
     }
     
     public boolean equals(Object obj) {
@@ -81,9 +76,18 @@ public class Vehicle{
         return false;
     }
     
-    
-    
-    
+    public String getVehicleClassification(int vehicleClassification) {
+        if (vehicleClassification == 1) {
+            return "Motorcycle";
+        } 
+        else if (vehicleClassification == 3) {
+            return "Light Motor Vehicle";
+        } 
+        else {
+            return "Heavy Motor Vehicle";
+        }
+    }
+
     public String toString(){
         return "VEHICLE TANK CAPACITY: "+ getTankCapacity() +
                " FUEL TYPE: "+ getFuelType() +

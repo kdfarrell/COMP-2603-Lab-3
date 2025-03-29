@@ -27,6 +27,10 @@ public class VehicleDriver {
         return false;
     }
     
+    public boolean canDrive(Vehicle v) {
+        return (v != null) && (v.equals(vehicle1) || v.equals(vehicle2));
+    }
+    
     // To String 
     public String toString() {
         return getName() + "\n 1. " + vehicle1.toString() +
